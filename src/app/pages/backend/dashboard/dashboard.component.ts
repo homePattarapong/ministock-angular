@@ -1,15 +1,22 @@
 import { Component, OnInit } from '@angular/core';
-
+import { ProductService } from '../../../services/product.service';
+ 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
-
-  constructor() { }
-
+ 
+  dataProduct:any = []; // กรณียังไม่รู้ dataType ว่าเป็นอะไร ใส่ Any ได้ (เปลื้อง Memory มากกว่า ถ้ารูปให้ระบุ DataType เลย)
+  constructor(public api: ProductService) { }
+ 
   ngOnInit(): void {
+    this.api.getProducts().subscribe((data: {}) => {
+      console.log(data);
+      this.dataProduct = data;
+    })
   }
-
+ 
+ 
 }
